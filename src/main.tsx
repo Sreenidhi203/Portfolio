@@ -1,0 +1,14 @@
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import '@/config/env' // validate env vars before anything renders
+import '@/styles/index.css'
+import App from './App.tsx'
+
+const rootEl = document.getElementById('root')
+if (!rootEl) throw new Error('Root element #root not found in index.html')
+
+createRoot(rootEl).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)

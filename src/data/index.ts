@@ -1,0 +1,161 @@
+import type { Project, Certification } from '@/types'
+
+export const projects: Project[] = [
+  {
+    id: '1',
+    title: 'AI Resume Screener',
+    description:
+      'An intelligent resume screening tool that ranks candidates using NLP and ML models, cutting manual review time by 70%.',
+    tags: ['Python', 'React'],
+    stack: ['Python', 'FastAPI', 'React', 'TypeScript', 'OpenAI API', 'PostgreSQL'],
+    features: [
+      'NLP-powered keyword extraction',
+      'Candidate ranking dashboard',
+      'Bulk PDF parsing',
+      'REST API with JWT auth',
+    ],
+    href: 'https://github.com/sreenidhi/ai-resume-screener',
+    liveHref: 'https://ai-resume-screener.vercel.app',
+    image: 'violet',
+  },
+  {
+    id: '2',
+    title: 'DevCollab — Real-time IDE',
+    description:
+      'A browser-based collaborative code editor with live cursors, chat, and one-click deployment to cloud sandboxes.',
+    tags: ['React', 'Node.js', 'WebSockets'],
+    stack: ['React', 'Node.js', 'Socket.io', 'Monaco Editor', 'Docker', 'Redis'],
+    features: [
+      'Multi-cursor real-time editing',
+      'Integrated terminal via xterm.js',
+      'Room-based session management',
+      'Docker sandbox execution',
+    ],
+    href: 'https://github.com/sreenidhi/devcollab',
+    liveHref: 'https://devcollab.vercel.app',
+    image: 'sky',
+  },
+  {
+    id: '3',
+    title: 'ShopSphere E-Commerce',
+    description:
+      'Full-stack e-commerce platform with Stripe payments, inventory management, and an admin analytics dashboard.',
+    tags: ['React', 'Node.js', 'MongoDB'],
+    stack: ['React', 'Express', 'MongoDB', 'Stripe API', 'Tailwind CSS', 'JWT'],
+    features: [
+      'Stripe checkout & webhooks',
+      'Role-based admin panel',
+      'Real-time inventory tracking',
+      'Email order notifications',
+    ],
+    href: 'https://github.com/sreenidhi/shopsphere',
+    liveHref: 'https://shopsphere-demo.vercel.app',
+    image: 'emerald',
+  },
+  {
+    id: '4',
+    title: 'WeatherSense Dashboard',
+    description:
+      'A beautiful weather dashboard with 7-day forecasts, interactive maps, and location-based air quality data.',
+    tags: ['React', 'TypeScript'],
+    stack: ['React', 'TypeScript', 'OpenWeather API', 'Leaflet.js', 'Recharts'],
+    features: [
+      'Geolocation auto-detect',
+      'Interactive Leaflet map',
+      'AQI & UV index cards',
+      'Animated weather icons',
+    ],
+    href: 'https://github.com/sreenidhi/weathersense',
+    image: 'amber',
+  },
+  {
+    id: '5',
+    title: 'TaskFlow — Kanban App',
+    description:
+      'A drag-and-drop Kanban board with sprint planning, burndown charts, and GitHub issue sync.',
+    tags: ['React', 'TypeScript', 'Node.js'],
+    stack: ['React', 'TypeScript', 'DnD Kit', 'Node.js', 'SQLite', 'GitHub API'],
+    features: [
+      'Drag-and-drop across columns',
+      'Sprint burndown chart',
+      'GitHub issue sync',
+      'Dark / light theme',
+    ],
+    href: 'https://github.com/sreenidhi/taskflow',
+    liveHref: 'https://taskflow-app.vercel.app',
+    image: 'rose',
+  },
+  {
+    id: '6',
+    title: 'SecureVault — Password Manager',
+    description:
+      'An AES-256 encrypted password manager with browser extension, TOTP 2FA, and zero-knowledge architecture.',
+    tags: ['Python', 'React', 'TypeScript'],
+    stack: ['React', 'TypeScript', 'Python', 'FastAPI', 'AES-256', 'TOTP'],
+    features: [
+      'AES-256 client-side encryption',
+      'TOTP two-factor auth',
+      'Browser extension (Chrome)',
+      'Password strength analyser',
+    ],
+    href: 'https://github.com/sreenidhi/securevault',
+    image: 'indigo',
+  },
+]
+
+export const certifications: Certification[] = [
+  {
+    id: '1',
+    title: 'AWS Certified Cloud Practitioner',
+    org: 'Amazon Web Services',
+    issued: 'Jan 2024',
+    credentialUrl: 'https://www.credly.com/badges/aws-cloud-practitioner',
+    color: 'amber',
+    abbr: 'AWS',
+  },
+  {
+    id: '2',
+    title: 'Meta Front-End Developer',
+    org: 'Meta / Coursera',
+    issued: 'Sep 2023',
+    credentialUrl: 'https://coursera.org/verify/professional-cert/meta-frontend',
+    color: 'sky',
+    abbr: 'META',
+  },
+  {
+    id: '3',
+    title: 'Google Data Analytics',
+    org: 'Google / Coursera',
+    issued: 'Jun 2023',
+    credentialUrl: 'https://coursera.org/verify/professional-cert/google-data-analytics',
+    color: 'emerald',
+    abbr: 'GGL',
+  },
+  {
+    id: '4',
+    title: 'React – The Complete Guide',
+    org: 'Udemy · Maximilian Schwarzmüller',
+    issued: 'Mar 2023',
+    credentialUrl: 'https://udemy.com/certificate/react-complete-guide',
+    color: 'violet',
+    abbr: 'RCT',
+  },
+  {
+    id: '5',
+    title: 'Python for Data Science & ML',
+    org: 'Udemy · Jose Portilla',
+    issued: 'Nov 2022',
+    credentialUrl: 'https://udemy.com/certificate/python-data-science-ml',
+    color: 'indigo',
+    abbr: 'PY',
+  },
+  {
+    id: '6',
+    title: 'Responsive Web Design',
+    org: 'freeCodeCamp',
+    issued: 'Aug 2022',
+    credentialUrl: 'https://freecodecamp.org/certification/sreenidhi/responsive-web-design',
+    color: 'rose',
+    abbr: 'FCC',
+  },
+]

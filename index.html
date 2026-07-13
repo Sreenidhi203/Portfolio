@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#7c3aed" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)" />
+    <title>Sreenidhi | Full-Stack Developer &amp; React Specialist</title>
+    <meta name="description" content="Sreenidhi — Full-Stack Developer portfolio. React, TypeScript, Node.js." />
+    <meta property="og:title" content="Sreenidhi | Full-Stack Developer &amp; React Specialist" />
+    <meta property="og:description" content="Full-Stack Developer specialising in React, TypeScript &amp; Node.js." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sreenidhi.dev/" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@sreenidhi" />
+    <meta name="twitter:image" content="/og-image.png" />
+    <!-- Preconnect to external origins used at runtime -->
+    <link rel="preconnect" href="https://github.com" />
+    <link rel="preconnect" href="https://linkedin.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <!-- LCP image preload -->
+    <link rel="preload" as="image" href="/hero.png" fetchpriority="high" />
+    <!-- Anti-flash theme script: runs before paint, no FOUC -->
+    <script>
+      ;(function () {
+        var stored = localStorage.getItem('theme')
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark')
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
