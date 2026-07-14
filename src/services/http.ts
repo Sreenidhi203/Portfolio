@@ -4,9 +4,11 @@ const BASE_URL = env.VITE_API_URL
 
 /** Distinguishes a non-2xx HTTP response from a network/timeout failure */
 export class HttpError extends Error {
-  constructor(public readonly status: number, message: string) {
+  readonly status: number
+  constructor(status: number, message: string) {
     super(message)
     this.name = 'HttpError'
+    this.status = status
   }
 }
 
@@ -23,8 +25,8 @@ const RETRYABLE_STATUSES = new Set([429, 502, 503, 504])
 
 async function request<T>(
   path: string,
-  init?: RequestInit,
-  attempt = 0,
+  init?: Parameters<typeof fetch>[1],
+  attempt = 0
 ): Promise<T> {
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS)
@@ -49,7 +51,7 @@ async function request<T>(
     if (err instanceof HttpError) throw err
     // AbortError = timeout; TypeError = network failure
     throw new NetworkError(
-      err instanceof Error ? err.message : 'Unknown network error',
+      err instanceof Error ? err.message : 'Unknown network error'
     )
   } finally {
     clearTimeout(timeout)
@@ -57,7 +59,7 @@ async function request<T>(
 }
 
 export const http = {
-  get:  <T>(path: string) => request<T>(path),
+  get: <T>(path: string) => request<T>(path),
   post: <T>(path: string, body: unknown) =>
     request<T>(path, { method: 'POST', body: JSON.stringify(body) }),
 }

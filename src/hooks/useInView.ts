@@ -1,8 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type RefObject } from 'react'
 
 export function useInView(
-  ref: React.RefObject<Element | null>,
-  options?: IntersectionObserverInit,
+  ref: RefObject<Element | null>,
+  options?: {
+    root?: Element | null
+    rootMargin?: string
+    threshold?: number | number[]
+  }
 ) {
   const [inView, setInView] = useState(false)
   const seen = useRef(false)

@@ -19,7 +19,7 @@ function validateEnv(): Env {
 
   if (missing.length > 0) {
     throw new Error(
-      `Missing required environment variables:\n${missing.map((k) => `  - ${k}`).join('\n')}\n\nSee .env.example for reference.`,
+      `Missing required environment variables:\n${missing.map((k) => `  - ${k}`).join('\n')}\n\nSee .env.example for reference.`
     )
   }
 

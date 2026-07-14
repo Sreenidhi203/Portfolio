@@ -1,111 +1,181 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, type CSSProperties } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { Sparkles } from 'lucide-react'
 import { SKILL_CATEGORIES } from '@/data/skills'
 import { fadeUp, stagger, VIEWPORT } from '@/utils/motion'
 import { SectionHeading, PillTabs } from '@/components'
 import type { Skill } from '@/types'
 
-const LEVEL = {
-  Beginner:     { pct: '25%',  track: 'bg-sky-400',     badge: 'bg-sky-50 text-sky-700 dark:bg-sky-950/50 dark:text-sky-400' },
-  Intermediate: { pct: '50%',  track: 'bg-amber-400',   badge: 'bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400' },
-  Advanced:     { pct: '75%',  track: 'bg-violet-500',  badge: 'bg-violet-50 text-violet-700 dark:bg-violet-950/50 dark:text-violet-400' },
-  Expert:       { pct: '100%', track: 'bg-emerald-500', badge: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400' },
-} as const
+const grid = stagger(0, 0.04)
 
-const grid = stagger(0, 0.055)
+// Core technologies to spotlight with glow treatment
+const SPOTLIGHT_TECHS = [
+  'Java',
+  'Spring Boot',
+  'Angular',
+  'Azure OpenAI',
+  'Docker',
+  'Microservices',
+  'React',
+  'TypeScript',
+]
 
-function SkillCard({ skill }: { skill: Skill }) {
-  const { name, icon: Icon, level, description, color } = skill
-  const cfg = LEVEL[level]
+function SkillBadge({ skill }: { skill: Skill }) {
+  const { name, icon: Icon, color } = skill
+  const isSpotlight = SPOTLIGHT_TECHS.includes(name)
 
   return (
-    <motion.article
+    <motion.div
       variants={fadeUp}
-      whileHover={{ y: -6, scale: 1.025 }}
-      transition={{ type: 'spring', stiffness: 280, damping: 22 }}
-      aria-label={`${name} — ${level}`}
-      className="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-[rgb(var(--surface))]"
+      whileHover={{ y: -5, scale: 1.04 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+      className={`group relative flex flex-col items-center gap-2 rounded-xl border p-3 text-center shadow-sm transition-all duration-300 hover:shadow-lg overflow-hidden ${
+        isSpotlight
+          ? 'border-[rgb(var(--border))] bg-[rgb(var(--surface))] hover:border-blue-500/40'
+          : 'border-[rgb(var(--border))] bg-[rgb(var(--surface))]'
+      }`}
     >
+      {/* Glow bg for spotlight techs */}
+      {isSpotlight && (
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"
+          style={{
+            background: `radial-gradient(circle at 50% 0%, ${color}15, transparent 70%)`,
+          }}
+          aria-hidden
+        />
+      )}
+
+      {/* Icon */}
       <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{ background: `radial-gradient(ellipse 80% 60% at 50% -10%, ${color}22, transparent)` }}
-      />
-
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gray-100 bg-gray-50 dark:border-gray-700 dark:bg-gray-800">
-          <Icon size={22} style={{ color }} color={color} aria-hidden />
-        </div>
-        <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${cfg.badge}`}>
-          {level}
-        </span>
-      </div>
-
-      <div className="flex flex-col gap-1">
-        <p className="font-semibold text-gray-900 dark:text-white">{name}</p>
-        <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">{description}</p>
-      </div>
-
-      <div
-        role="progressbar"
-        aria-label={`${name} proficiency`}
-        aria-valuenow={parseInt(cfg.pct)}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        className="mt-auto h-1 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800"
+        className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-subtle))] transition-all duration-300 group-hover:border-transparent group-hover:shadow-md"
+        style={{ boxShadow: 'none' }}
       >
-        <motion.div
-          className={`h-full rounded-full ${cfg.track}`}
-          initial={{ width: 0 }}
-          whileInView={{ width: cfg.pct }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.9, delay: 0.15, ease: 'easeOut' }}
+        <Icon size={18} style={{ color }} aria-hidden />
+        {/* Icon glow on hover */}
+        <div
+          className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{ boxShadow: `0 0 16px ${color}40` }}
+          aria-hidden
         />
       </div>
-    </motion.article>
+
+      {/* Name */}
+      <p className="text-xs font-semibold leading-tight text-[rgb(var(--text))]">
+        {name}
+      </p>
+    </motion.div>
   )
 }
 
 export default function SkillsSection() {
   const [activeId, setActiveId] = useState('frontend')
   const sectionRef = useRef<HTMLElement>(null)
-  const inView     = useInView(sectionRef, { once: true, margin: '-80px' })
-  const animate    = inView ? 'show' : 'hidden'
-  const active     = SKILL_CATEGORIES.find((c) => c.id === activeId) ?? SKILL_CATEGORIES[0]
+  const inView = useInView(sectionRef, { once: true, margin: '-80px' })
+  const animate = inView ? 'show' : 'hidden'
+  const active =
+    SKILL_CATEGORIES.find((c) => c.id === activeId) ?? SKILL_CATEGORIES[0]
+
+  const featuredSkills = SKILL_CATEGORIES.flatMap((c) => c.skills).filter(
+    (s) => s.featured
+  )
 
   return (
-    <section id="skills" ref={sectionRef} className="section relative overflow-hidden">
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-gray-50/80 via-transparent to-transparent dark:from-gray-900/50" />
+    <section
+      id="skills"
+      ref={sectionRef}
+      className="section relative overflow-hidden"
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[rgb(var(--bg-subtle))]/60 via-transparent to-transparent"
+      />
 
       <div className="container-main">
-
-        <motion.div variants={fadeUp} initial="hidden" animate={animate} viewport={VIEWPORT}>
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate={animate}
+          viewport={VIEWPORT}
+        >
           <SectionHeading
-            label="Tech Stack"
+            label="My Skills"
             title={
               <>
-                Skills &amp;{' '}
-                <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent dark:from-violet-400 dark:to-indigo-400">
-                  Technologies
+                Technologies &amp;{' '}
+                <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400">
+                  Expertise
                 </span>
               </>
             }
-            subtitle="A curated overview of the tools and technologies I work with across the full stack."
+            subtitle="A curated stack of technologies I use to build modern, scalable, AI-powered applications."
           />
         </motion.div>
 
-        <motion.div variants={fadeUp} initial="hidden" animate={animate} viewport={VIEWPORT}>
+        {/* Core Technologies Spotlight */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate={animate}
+          viewport={VIEWPORT}
+          className="mb-6"
+        >
+          <div className="relative rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--surface))] p-6 overflow-hidden">
+            {/* Background shimmer */}
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 rounded-2xl"
+            />
+
+            <div className="relative flex items-center gap-2 mb-5">
+              <Sparkles size={14} className="text-amber-400" aria-hidden />
+              <p className="text-xs font-bold uppercase tracking-widest text-[rgb(var(--text-muted))]">
+                Core Technologies
+              </p>
+            </div>
+
+            <div className="relative flex flex-wrap items-center gap-2.5">
+              {featuredSkills.map(({ name, icon: Icon, color }) => (
+                <motion.div
+                  key={name}
+                  whileHover={{ y: -3, scale: 1.06 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                  className="group flex items-center gap-2 rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-subtle))] px-3.5 py-2 shadow-sm transition-all duration-200 hover:border-transparent hover:shadow-md cursor-default"
+                  style={{ '--tech-color': color } as CSSProperties}
+                >
+                  <Icon size={15} style={{ color }} aria-hidden />
+                  <span className="text-xs font-semibold text-[rgb(var(--text))]">
+                    {name}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Category tabs */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate={animate}
+          viewport={VIEWPORT}
+        >
           <PillTabs
-            tabs={SKILL_CATEGORIES.map((c) => ({ id: c.id, label: c.label, count: c.skills.length }))}
+            tabs={SKILL_CATEGORIES.map((c) => ({
+              id: c.id,
+              label: c.label,
+              count: c.skills.length,
+            }))}
             activeId={activeId}
             onChange={setActiveId}
-            layoutId="tab-pill"
+            layoutId="skill-tab-pill"
             role="tablist"
             ariaLabel="Skill categories"
-            className="mb-10"
+            className="mb-8"
           />
         </motion.div>
 
+        {/* Skills grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeId}
@@ -113,28 +183,13 @@ export default function SkillsSection() {
             initial="hidden"
             animate="show"
             exit={{ opacity: 0, transition: { duration: 0.12 } }}
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
           >
             {active.skills.map((skill) => (
-              <SkillCard key={skill.name} skill={skill} />
+              <SkillBadge key={skill.name} skill={skill} />
             ))}
           </motion.div>
         </AnimatePresence>
-
-        <motion.div
-          role="group"
-          variants={fadeUp} initial="hidden" animate={animate} viewport={VIEWPORT}
-          className="mt-6 flex flex-wrap items-center justify-center gap-6"
-          aria-label="Skill level legend"
-        >
-          {(Object.entries(LEVEL) as [keyof typeof LEVEL, typeof LEVEL[keyof typeof LEVEL]][]).map(([lvl, cfg]) => (
-            <div key={lvl} className="flex items-center gap-2">
-              <div className={`h-2 w-6 rounded-full ${cfg.track}`} aria-hidden />
-              <span className="text-xs text-gray-500 dark:text-gray-400">{lvl}</span>
-            </div>
-          ))}
-        </motion.div>
-
       </div>
     </section>
   )

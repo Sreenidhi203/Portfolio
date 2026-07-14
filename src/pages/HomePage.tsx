@@ -1,12 +1,12 @@
 import { lazy, Suspense } from 'react'
 import HeroSection from './HeroSection'
 
-const AboutSection          = lazy(() => import('./AboutSection'))
-const SkillsSection         = lazy(() => import('./SkillsSection'))
-const ExperienceSection     = lazy(() => import('./ExperienceSection'))
-const ProjectsSection       = lazy(() => import('./ProjectsSection'))
+const AboutSection = lazy(() => import('./AboutSection'))
+const SkillsSection = lazy(() => import('./SkillsSection'))
+const ExperienceSection = lazy(() => import('./ExperienceSection'))
+const ProjectsSection = lazy(() => import('./ProjectsSection'))
 const CertificationsSection = lazy(() => import('./CertificationsSection'))
-const ContactSection        = lazy(() => import('./ContactSection'))
+const ContactSection = lazy(() => import('./ContactSection'))
 
 // Skeleton placeholder prevents CLS while lazy chunks load
 function SectionFallback() {
@@ -19,7 +19,10 @@ function SectionFallback() {
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} className="h-48 animate-pulse rounded-2xl bg-gray-200 dark:bg-gray-800" />
+          <div
+            key={i}
+            className="h-48 animate-pulse rounded-2xl bg-gray-200 dark:bg-gray-800"
+          />
         ))}
       </div>
     </div>

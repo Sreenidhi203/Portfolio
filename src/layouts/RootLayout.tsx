@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
-import { ErrorBoundary } from '@/components'
+import { ErrorBoundary, CustomCursor, ScrollProgress } from '@/components'
 import { ThemeProvider } from '@/context/ThemeContext'
 
 interface RootLayoutProps {
@@ -11,6 +11,8 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <ThemeProvider>
+      <CustomCursor />
+      <ScrollProgress />
       <div className="flex min-h-screen flex-col">
         {/* Skip to content — WCAG 2.4.1 */}
         <a
@@ -21,7 +23,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </a>
         <Navbar />
         <ErrorBoundary>
-          <main id="main-content" className="flex-1">{children}</main>
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
         </ErrorBoundary>
         <Footer />
       </div>

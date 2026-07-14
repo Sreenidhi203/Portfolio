@@ -30,7 +30,7 @@ export function useCountUp(target: number, duration = 1600) {
         }
         rafId = requestAnimationFrame(tick)
       },
-      { threshold: 0.4 },
+      { threshold: 0.4 }
     )
 
     observer.observe(el)

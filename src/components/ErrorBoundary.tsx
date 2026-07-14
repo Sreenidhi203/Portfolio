@@ -1,7 +1,11 @@
 import { Component, type ReactNode } from 'react'
 
-interface Props { children: ReactNode }
-interface State { hasError: boolean }
+interface Props {
+  children: ReactNode
+}
+interface State {
+  hasError: boolean
+}
 
 export class ErrorBoundary extends Component<Props, State> {
   state: State = { hasError: false }
@@ -10,14 +14,17 @@ export class ErrorBoundary extends Component<Props, State> {
     return { hasError: true }
   }
 
-  componentDidCatch(error: Error, info: React.ErrorInfo) {
-    console.error('[ErrorBoundary]', error, info.componentStack)
+  componentDidCatch() {
+    // Errors are surfaced via the UI; no logging needed in production
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div role="alert" className="flex min-h-[40vh] flex-col items-center justify-center gap-4 text-center">
+        <div
+          role="alert"
+          className="flex min-h-[40vh] flex-col items-center justify-center gap-4 text-center"
+        >
           <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
             Something went wrong.
           </p>

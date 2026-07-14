@@ -1,4 +1,4 @@
-export type TimelineType = 'Education' | 'Internship' | 'Capgemini'
+export type TimelineType = 'Education' | 'Work'
 
 export interface TimelineEntry {
   id: string
@@ -6,62 +6,57 @@ export interface TimelineEntry {
   title: string
   org: string
   period: string
+  description: string
   details: string[]
 }
 
 export const timelineData: TimelineEntry[] = [
   {
-    id: 'education',
+    id: 'education-hsc',
     type: 'Education',
-    title: 'B.Tech – Computer Science & Engineering',
-    org: 'Sreenidhi Institute of Science and Technology',
-    period: '2021 – 2025',
-    details: [
-      'CGPA: 8.2 / 10',
-      'Relevant coursework: DSA, DBMS, OS, Computer Networks, Machine Learning',
-      'Active member of the coding club and tech fest organiser',
-    ],
+    title: 'Higher Secondary (XII) \u2014 MPC',
+    org: 'Sri Chaitanya Junior College',
+    period: '2019 \u2013 2021',
+    description:
+      'Completed higher secondary education with focus on Mathematics, Physics, and Chemistry.',
+    details: ['Scored 942/1000'],
   },
   {
-    id: 'internship',
-    type: 'Internship',
-    title: 'Software Development Intern',
-    org: 'Tech Solutions Company',
-    period: 'Jun 2024 – Aug 2024',
-    details: [
-      'Built REST APIs with Node.js and Express, reducing average response time by 30%',
-      'Developed reusable React component library consumed across 3 internal product teams',
-      'Wrote unit tests with Jest, achieving 85% code coverage on assigned modules',
-    ],
+    id: 'education-btech',
+    type: 'Education',
+    title: 'B.Tech in Computer Science',
+    org: 'Institute Of Aeronautical Engineering',
+    period: '2021 \u2013 2025',
+    description:
+      'Graduated with a strong foundation in computer science, data structures, and software engineering.',
+    details: ['CGPA: 8.9/10'],
   },
   {
     id: 'capgemini',
-    type: 'Capgemini',
-    title: 'Associate Software Engineer',
+    type: 'Work',
+    title: 'Software Engineer',
     org: 'Capgemini',
-    period: 'Aug 2025',
-    details: [
-      'Upcoming role — campus placement offer received (2025 batch)',
-      'Focus area: full-stack development and cloud-native solutions',
-      'Completed pre-joining training in Java, Spring Boot, and AWS fundamentals',
-    ],
+    period: 'Sep 2025 \u2013 Present',
+    description:
+      'Building and maintaining enterprise-grade microservices and client-facing web applications for global financial services clients.',
+    details: [],
   },
 ]
 
-export const TYPE_CONFIG: Record<TimelineType, { dot: string; badge: string; bullet: string }> = {
+export const TYPE_CONFIG: Record<
+  TimelineType,
+  { dot: string; badge: string; bullet: string }
+> = {
   Education: {
-    dot:    'bg-violet-500 ring-violet-200 dark:ring-violet-800',
-    badge:  'bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300',
-    bullet: 'bg-violet-500',
+    dot: 'bg-purple-500 ring-purple-200 dark:ring-purple-800',
+    badge:
+      'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300',
+    bullet: 'bg-purple-500',
   },
-  Internship: {
-    dot:    'bg-sky-500 ring-sky-200 dark:ring-sky-800',
-    badge:  'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',
-    bullet: 'bg-sky-500',
-  },
-  Capgemini: {
-    dot:    'bg-emerald-500 ring-emerald-200 dark:ring-emerald-800',
-    badge:  'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
+  Work: {
+    dot: 'bg-emerald-500 ring-emerald-200 dark:ring-emerald-800',
+    badge:
+      'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
     bullet: 'bg-emerald-500',
   },
 }

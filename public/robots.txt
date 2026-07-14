@@ -1,4 +1,5 @@
+# Crawl rules
 User-agent: *
 Allow: /
 
-Sitemap: https://sreenidhi.dev/sitemap.xml
+Sitemap: https://sreenidhii.dev/sitemap.xml

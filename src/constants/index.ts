@@ -1,32 +1,48 @@
 export const SITE = {
-  name: 'Sreenidhi',
-  tagline: 'Full-Stack Developer',
-  url: 'https://sreenidhi.dev',
-  description: 'Full-Stack Developer specialising in React, TypeScript & Node.js.',
-  email: 'hello@sreenidhi.dev',
-  github: 'https://github.com/sreenidhi',
-  linkedin: 'https://linkedin.com/in/sreenidhi',
-  twitter: 'https://twitter.com/sreenidhi',
+  name: 'Sreenidhii',
+  tagline: 'Full-Stack Developer · AI-First Builder',
+  url: 'https://sreenidhii.dev',
+  description:
+    'Full-Stack Developer & AI-First Builder specialising in Gen AI, RAG pipelines, and multi-agent systems.',
+  email: 'sreenidhi202505@gmail.com',
+  github: 'https://github.com/Sreenidhi203',
+  linkedin: 'https://linkedin.com/in/sree-n-04b590348',
+  resume: 'https://drive.google.com/file/d/your-resume-id/view',
 } as const
 
+/** True only when a real resume URL has been configured */
+export const HAS_RESUME = !SITE.resume.includes('your-resume-id')
+
 export const BIO = [
-  'I craft fast, accessible, and pixel-perfect digital experiences. Passionate about clean architecture, thoughtful UI, and shipping products that make a real difference.',
-  'I\'m a Computer Science student at Sreenidhi Institute of Science & Technology (2021–2025), joining Capgemini as an Associate Software Engineer in August 2025. I specialise in React, TypeScript, and Node.js ecosystems.',
-  'I\'ve shipped 20+ personal and academic projects, contributed to open-source, and developed a deep appreciation for clean code, thoughtful design systems, and developer experience.',
-  'I believe great software is built at the intersection of engineering rigour and design empathy — and I bring both to every project I work on.',
+  'I build full-stack web applications with an AI-first approach — from Gen AI and RAG pipelines to multi-agent systems. I turn complex ideas into production-ready solutions.',
+  "I'm a Computer Science student at Institute of Aeronautical Engineering (2021–2025), joining Capgemini as a Software Engineer in September 2025.",
+  "I believe in learning by building. Every project I take on is an opportunity to push boundaries — whether it's integrating LLMs into real workflows or crafting intuitive user experiences.",
+  "I'm driven by curiosity and a bias toward shipping.",
+] as const
+
+export const HERO_STATS = [
+  { value: 10, suffix: '+', label: 'Projects Shipped' },
+  { value: 3, suffix: '', label: 'Cloud Certs' },
+  { value: 20, suffix: '+', label: 'Technologies' },
+  { value: 5, suffix: '+', label: 'AI Agents Built' },
 ] as const
 
 export const NAV_LINKS = [
-  { label: 'About',          href: '#about' },
-  { label: 'Skills',         href: '#skills' },
-  { label: 'Experience',     href: '#experience' },
-  { label: 'Projects',       href: '#projects' },
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: '#projects' },
   { label: 'Certifications', href: '#certifications' },
-  { label: 'Contact',        href: '#contact' },
+  { label: 'Contact', href: '#contact' },
 ] as const
 
 export const SECTION_IDS = NAV_LINKS.map((l) => l.href.slice(1)) as [
-  'about', 'skills', 'experience', 'projects', 'certifications', 'contact'
+  'about',
+  'skills',
+  'experience',
+  'projects',
+  'certifications',
+  'contact',
 ]
 
 export const FOOTER_LINKS = [
@@ -37,10 +53,21 @@ export const FOOTER_LINKS = [
   {
     heading: 'Connect',
     links: [
-      { label: 'GitHub',      href: 'https://github.com/sreenidhi',         external: true },
-      { label: 'LinkedIn',    href: 'https://linkedin.com/in/sreenidhi',    external: true },
-      { label: 'Twitter / X', href: 'https://twitter.com/sreenidhi',        external: true },
-      { label: 'Email',       href: 'mailto:hello@sreenidhi.dev',           external: true },
+      {
+        label: 'GitHub',
+        href: 'https://github.com/Sreenidhi203',
+        external: true,
+      },
+      {
+        label: 'LinkedIn',
+        href: 'https://linkedin.com/in/sree-n-04b590348',
+        external: true,
+      },
+      {
+        label: 'Email',
+        href: 'mailto:sreenidhi202505@gmail.com',
+        external: true,
+      },
     ],
   },
 ] as const

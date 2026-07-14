@@ -19,11 +19,14 @@ export function useActiveSection() {
           let bestId = ''
           let bestRatio = 0
           for (const [k, v] of Object.entries(ratios.current)) {
-            if (v > bestRatio) { bestRatio = v; bestId = k }
+            if (v > bestRatio) {
+              bestRatio = v
+              bestId = k
+            }
           }
           if (bestId && bestRatio > 0) setActive(bestId)
         },
-        { threshold: [0, 0.25, 0.5, 0.75, 1] },
+        { threshold: [0, 0.25, 0.5, 0.75, 1] }
       )
 
       obs.observe(el)

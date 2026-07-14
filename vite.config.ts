@@ -10,18 +10,23 @@ export default defineConfig({
   },
   build: {
     target: 'es2020',
-    minify: 'esbuild',
+    minify: 'oxc',
     sourcemap: false,
     assetsInlineLimit: 4096,
     cssCodeSplit: true,
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react':  ['react', 'react-dom'],
-          'vendor-motion': ['framer-motion'],
-          'vendor-icons':  ['lucide-react', 'react-icons'],
-        },
+        manualChunks(id) {
+        if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) return 'vendor-react'
+        if (id.includes('node_modules/framer-motion')) return 'vendor-motion'
+        if (id.includes('node_modules/lucide-react') || id.includes('node_modules/react-icons')) return 'vendor-icons'
+      },
       },
     },
+  },
+  server: {
+    port: 5173,
+    strictPort: false,
   },
 })

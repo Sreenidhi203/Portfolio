@@ -1,154 +1,253 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowRight, GraduationCap, Heart, Rocket } from 'lucide-react'
+import {
+  Rocket,
+  GraduationCap,
+  Briefcase,
+  Zap,
+  Code2,
+  Brain,
+} from 'lucide-react'
 import { useCountUp } from '@/hooks'
-import { fadeUp, stagger, VIEWPORT, BTN_TAP } from '@/utils/motion'
-import { SectionHeading, SubHeading } from '@/components'
-import { scrollToSection } from '@/utils'
+import { fadeUp, stagger } from '@/utils/motion'
+import { SectionHeading } from '@/components'
 import { BIO } from '@/constants'
-import { education, interests } from '@/data/about'
 
-/* ── Data ─────────────────────────────────────────────────────── */
 const STATS = [
-  { label: 'Years Experience', value: 1,  suffix: '+' },
-  { label: 'Projects Shipped', value: 20, suffix: '+' },
-  { label: 'Certifications',   value: 6,  suffix: '' },
-  { label: 'GitHub Repos',     value: 15, suffix: '+' },
+  {
+    label: 'Projects Shipped',
+    value: 10,
+    suffix: '+',
+    icon: Rocket,
+    color: 'text-blue-500',
+    bg: 'bg-blue-500/10',
+    ring: 'ring-blue-500/20',
+  },
+  {
+    label: 'Cloud Certs',
+    value: 3,
+    suffix: '',
+    icon: GraduationCap,
+    color: 'text-purple-500',
+    bg: 'bg-purple-500/10',
+    ring: 'ring-purple-500/20',
+  },
+  {
+    label: 'Technologies',
+    value: 20,
+    suffix: '+',
+    icon: Code2,
+    color: 'text-cyan-500',
+    bg: 'bg-cyan-500/10',
+    ring: 'ring-cyan-500/20',
+  },
+  {
+    label: 'AI Agents Built',
+    value: 5,
+    suffix: '+',
+    icon: Brain,
+    color: 'text-rose-500',
+    bg: 'bg-rose-500/10',
+    ring: 'ring-rose-500/20',
+  },
 ] as const
 
+const HIGHLIGHTS = [
+  {
+    icon: Briefcase,
+    accent: 'from-blue-500 to-cyan-500',
+    iconBg: 'bg-blue-500/10 text-blue-500',
+    title: 'What I Do',
+    text: 'Build full-stack applications with an AI-first approach — from Gen AI and RAG pipelines to multi-agent systems. End-to-end ownership from architecture to deployment.',
+  },
+  {
+    icon: GraduationCap,
+    accent: 'from-purple-500 to-indigo-500',
+    iconBg: 'bg-purple-500/10 text-purple-500',
+    title: 'Education',
+    text: 'B.Tech Computer Science, Institute of Aeronautical Engineering (2021–2025). CGPA 8.9/10. Joining Capgemini as Software Engineer, Sep 2025.',
+  },
+  {
+    icon: Zap,
+    accent: 'from-amber-500 to-orange-500',
+    iconBg: 'bg-amber-500/10 text-amber-500',
+    title: 'What Drives Me',
+    text: 'Curiosity and a bias toward shipping. Every project is a chance to push boundaries — integrating LLMs into real workflows, crafting intuitive UX, and staying on the cutting edge.',
+  },
+] as const
 
-function StatCard({ value, suffix, label }: { value: number; suffix: string; label: string }) {
+function StatCard({
+  value,
+  suffix,
+  label,
+  icon: Icon,
+  color,
+  bg,
+  ring,
+}: (typeof STATS)[number]) {
   const { count, ref } = useCountUp(value)
   return (
     <motion.div
-      whileHover={{ y: -4, scale: 1.03 }}
-      transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-      className="flex flex-col items-center gap-1 rounded-2xl border border-gray-200 bg-white p-4 text-center shadow-sm dark:border-gray-800 dark:bg-gray-900"
+      variants={fadeUp}
+      whileHover={{ y: -5, scale: 1.04 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+      className="group relative flex flex-col items-center gap-3 rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--surface))] p-5 text-center shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[rgb(var(--border))]/80 overflow-hidden"
     >
-      <dl>
-        <dd ref={ref} className="text-4xl font-extrabold text-gray-900 dark:text-white">
-          {count}{suffix}
+      {/* Subtle gradient bg on hover */}
+      <div
+        className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${bg} rounded-2xl`}
+        aria-hidden
+      />
+      <div
+        className={`relative flex h-11 w-11 items-center justify-center rounded-xl ring-2 ${ring} ${bg}`}
+      >
+        <Icon size={20} className={color} aria-hidden />
+      </div>
+      <dl className="relative">
+        <dd
+          ref={ref}
+          className="text-2xl font-black tabular-nums text-[rgb(var(--text))]"
+          style={{ letterSpacing: '-0.03em' }}
+        >
+          {count}
+          {suffix}
         </dd>
-        <dt className="text-sm text-gray-500 dark:text-gray-400">{label}</dt>
+        <dt className="mt-0.5 text-[11px] font-semibold uppercase tracking-widest text-[rgb(var(--text-muted))]">
+          {label}
+        </dt>
       </dl>
     </motion.div>
   )
 }
 
-/* ── Main component ───────────────────────────────────────────── */
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null)
-  const inView     = useInView(sectionRef, { once: true, margin: '-80px' })
-  const animate    = inView ? 'show' : 'hidden'
+  const inView = useInView(sectionRef, { once: true, margin: '-80px' })
+  const animate = inView ? 'show' : 'hidden'
 
   return (
-    <section id="about" ref={sectionRef} className="section relative overflow-hidden">
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-violet-50/30 to-transparent dark:via-violet-950/10" />
+    <section
+      id="about"
+      ref={sectionRef}
+      className="section relative overflow-hidden"
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-blue-50/40 to-transparent dark:via-blue-950/8"
+      />
 
       <div className="container-main">
-
-        {/* Heading */}
-        <motion.div variants={stagger(0)} initial="hidden" animate={animate} viewport={VIEWPORT} className="mb-12">
-          <motion.div variants={fadeUp}>
-            <SectionHeading
-              label="About Me"
-              title={
-                <>
-                  Crafting digital experiences{' '}
-                  <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent dark:from-violet-400 dark:to-indigo-400">
-                    with purpose
-                  </span>
-                </>
-              }
-            />
-          </motion.div>
+        <motion.div variants={fadeUp} initial="hidden" animate={animate}>
+          <SectionHeading
+            label="About Me"
+            title={
+              <>
+                The Engineer{' '}
+                <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400">
+                  Behind the Code
+                </span>
+              </>
+            }
+            subtitle="Full-stack developer with an AI-first mindset — I build production-ready systems that scale."
+          />
         </motion.div>
 
-        {/* Intro + Stats */}
-        <motion.div variants={stagger(0.1)} initial="hidden" animate={animate} className="mb-10 grid gap-10 lg:grid-cols-5 lg:gap-16">
-          <motion.div variants={fadeUp} className="flex flex-col gap-6 lg:col-span-3">
-            <SubHeading
-              icon={Rocket}
-              label="Who I Am"
-              color="bg-violet-100 text-violet-600 dark:bg-violet-950/60 dark:text-violet-400"
-            />
-            <p className="text-base leading-relaxed text-gray-600 dark:text-gray-400">
-              I&apos;m a <strong className="font-semibold text-gray-900 dark:text-white">Computer Science student</strong> at Sreenidhi Institute of Science &amp; Technology (2021–2025),
-              joining <strong className="font-semibold text-gray-900 dark:text-white">Capgemini</strong> as an Associate Software Engineer in August 2025.
-              I specialise in React, TypeScript, and Node.js ecosystems.
+        {/* Bio + Stats */}
+        <motion.div
+          variants={stagger(0, 0.1)}
+          initial="hidden"
+          animate={animate}
+          className="mb-10 grid gap-10 lg:grid-cols-5 lg:gap-14"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-col gap-5 lg:col-span-3"
+          >
+            <p className="text-base leading-[1.8] text-[rgb(var(--text-muted))]">
+              I'm a{' '}
+              <strong className="font-semibold text-[rgb(var(--text))]">
+                full-stack developer
+              </strong>{' '}
+              who builds with an AI-first mindset. From designing responsive
+              frontends to architecting scalable backends, I bring end-to-end
+              ownership to every project. My focus areas include{' '}
+              <strong className="font-semibold text-[rgb(var(--text))]">
+                Generative AI, RAG pipelines, agentic AI,
+              </strong>{' '}
+              and multi-agent systems.
             </p>
-            <p className="text-base leading-relaxed text-gray-600 dark:text-gray-400">{BIO[2]}</p>
-            <p className="text-base leading-relaxed text-gray-600 dark:text-gray-400">{BIO[3]}</p>
-            <motion.a
-              href="#skills"
-              onClick={(e) => { e.preventDefault(); scrollToSection('#skills') }}
-              {...BTN_TAP}
-              className="mt-2 inline-flex w-fit items-center gap-2 rounded-xl bg-violet-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition-colors hover:bg-violet-700 dark:shadow-violet-900/40"
-            >
-              View My Skills <ArrowRight size={15} aria-hidden />
-            </motion.a>
+            <p className="text-base leading-[1.8] text-[rgb(var(--text-muted))]">
+              {BIO[2]}
+            </p>
+
+            {/* Core tech strip */}
+            <div className="flex flex-wrap gap-2 pt-1">
+              {[
+                'Java',
+                'Spring Boot',
+                'Angular',
+                'React',
+                'Azure OpenAI',
+                'Docker',
+                'Microservices',
+              ].map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full border border-blue-500/20 bg-blue-500/8 px-3 py-1 text-xs font-semibold text-blue-600 dark:border-blue-400/20 dark:bg-blue-400/8 dark:text-blue-400"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
           </motion.div>
 
-          <motion.div variants={fadeUp} className="grid grid-cols-2 gap-4 content-start lg:col-span-2">
-            {STATS.map((s) => <StatCard key={s.label} {...s} />)}
+          <motion.div
+            variants={stagger(0, 0.08)}
+            initial="hidden"
+            animate={animate}
+            className="grid grid-cols-2 gap-3 content-start lg:col-span-2"
+          >
+            {STATS.map((s) => (
+              <StatCard key={s.label} {...s} />
+            ))}
           </motion.div>
         </motion.div>
 
-        {/* Career Journey removed — accurate timeline lives in ExperienceSection */}
-
-        {/* Education + Interests */}
-        <motion.div variants={stagger(0.2)} initial="hidden" animate={animate} className="grid gap-8 lg:grid-cols-2">
-
-          {/* Education */}
-          <motion.div variants={fadeUp}>
-            <SubHeading icon={GraduationCap} label="Education" color="bg-indigo-100 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400" />
-            <div className="flex flex-col gap-4">
-              {education.map((edu) => (
-                <motion.div
-                  key={edu.id}
-                  whileHover={{ y: -4 }}
-                  transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                  className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-[rgb(var(--surface))]"
-                >
-                  <div className="mb-1 flex items-start justify-between gap-2">
-                    <p className="font-semibold text-gray-900 dark:text-white">{edu.degree}</p>
-                    <span className="shrink-0 rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-medium text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400">
-                      {edu.year}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{edu.school}</p>
-                  <p className="mt-2 text-xs font-medium text-gray-500 dark:text-gray-500">{edu.grade}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Interests */}
-          <motion.div variants={fadeUp}>
-            <SubHeading icon={Heart} label="Personal Interests" color="bg-fuchsia-100 text-fuchsia-600 dark:bg-fuchsia-950/60 dark:text-fuchsia-400" />
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {interests.map(({ id, label, icon: Icon }) => (
-                <motion.div
-                  key={id}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="flex cursor-default flex-col items-center gap-2 rounded-2xl border border-gray-200 bg-white p-4 text-center shadow-sm dark:border-gray-800 dark:bg-[rgb(var(--surface))]"
-                >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-100 to-indigo-100 dark:from-violet-950/60 dark:to-indigo-950/60">
-                    <Icon size={18} className="text-violet-600 dark:text-violet-400" aria-hidden />
-                  </div>
-                  <span className="text-xs font-medium text-gray-700 dark:text-gray-300">{label}</span>
-                </motion.div>
-              ))}
-            </div>
-            <div className="mt-6 rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50 to-indigo-50 p-5 dark:border-violet-800/40 dark:from-violet-950/30 dark:to-indigo-950/30">
-              <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">
-                <strong className="font-semibold text-violet-700 dark:text-violet-300">Fun fact:</strong>{' '}
-                I&apos;ve written over 100,000 lines of TypeScript and still get excited every time a complex type resolves correctly. ☕
-              </p>
-            </div>
-          </motion.div>
-
+        {/* Highlight cards */}
+        <motion.div
+          variants={stagger(0, 0.1)}
+          initial="hidden"
+          animate={animate}
+          className="grid gap-4 sm:grid-cols-3"
+        >
+          {HIGHLIGHTS.map(({ icon: Icon, accent, iconBg, title, text }) => (
+            <motion.div
+              key={title}
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+              className="group relative flex flex-col gap-3 rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--surface))] p-5 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-[rgb(var(--border))]/80 overflow-hidden"
+            >
+              {/* Top accent line */}
+              <div
+                className={`absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r ${accent} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
+                aria-hidden
+              />
+              <div
+                className={`flex h-9 w-9 items-center justify-center rounded-xl ${iconBg}`}
+              >
+                <Icon size={16} aria-hidden />
+              </div>
+              <div>
+                <p className="text-sm font-bold tracking-tight text-[rgb(var(--text))]">
+                  {title}
+                </p>
+                <p className="mt-1.5 text-[13px] leading-relaxed text-[rgb(var(--text-muted))]">
+                  {text}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
