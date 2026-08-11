@@ -16,15 +16,18 @@ import {
   SiGooglecloud,
   SiDocker,
   SiKubernetes,
+  SiGithubactions,
+  SiTerraform,
   SiGit,
   SiGithub,
   SiGithubcopilot,
   SiFigma,
   SiPostman,
+  SiSwagger,
 } from 'react-icons/si'
 import { FaJava, FaAws } from 'react-icons/fa'
 import { VscCode, VscAzure } from 'react-icons/vsc'
-import { TbBrandOpenai, TbBrain, TbRobot } from 'react-icons/tb'
+import { TbBrandOpenai, TbBrain, TbRobot, TbSparkles, TbNetwork } from 'react-icons/tb'
 import type { SkillCategory } from '@/types'
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
@@ -169,14 +172,6 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         featured: true,
       },
       {
-        name: 'Docker',
-        icon: SiDocker,
-        level: 'Advanced',
-        color: '#2496ED',
-        description: 'Containerization & image management',
-        featured: true,
-      },
-      {
         name: 'AWS',
         icon: FaAws,
         level: 'Intermediate',
@@ -198,11 +193,19 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         description: 'Container orchestration at scale',
       },
       {
-        name: 'Git',
-        icon: SiGit,
-        level: 'Expert',
-        color: '#F05032',
-        description: 'Version control & branching strategies',
+        name: 'GitHub Actions',
+        icon: SiGithubactions,
+        level: 'Advanced',
+        color: '#2088FF',
+        description: 'CI/CD pipelines & automated workflows',
+        featured: true,
+      },
+      {
+        name: 'Terraform',
+        icon: SiTerraform,
+        level: 'Intermediate',
+        color: '#7B42BC',
+        description: 'Infrastructure as code & cloud provisioning',
       },
     ],
   },
@@ -233,6 +236,28 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         color: '#8b5cf6',
         description: 'Core AI/ML concepts & RAG pipelines',
       },
+      {
+        name: 'Gen AI',
+        icon: TbSparkles,
+        level: 'Advanced',
+        color: '#f59e0b',
+        description: 'Generative AI models, LLMs & prompt engineering',
+        featured: true,
+      },
+      {
+        name: 'Agentic AI',
+        icon: TbRobot,
+        level: 'Advanced',
+        color: '#ec4899',
+        description: 'Autonomous AI agents with tool use & planning',
+      },
+      {
+        name: 'Multi Agents',
+        icon: TbNetwork,
+        level: 'Advanced',
+        color: '#14b8a6',
+        description: 'Multi-agent orchestration & coordination systems',
+      },
     ],
   },
   {
@@ -240,11 +265,18 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     label: 'Tools',
     skills: [
       {
-        name: 'GitHub Copilot',
-        icon: SiGithubcopilot,
-        level: 'Advanced',
-        color: '#6e40c9',
-        description: 'AI-powered code assistant',
+        name: 'Git',
+        icon: SiGit,
+        level: 'Expert',
+        color: '#F05032',
+        description: 'Version control & branching strategies',
+      },
+      {
+        name: 'GitHub',
+        icon: SiGithub,
+        level: 'Expert',
+        color: '#a3a3a3',
+        description: 'Collaboration & code hosting',
       },
       {
         name: 'Postman',
@@ -252,6 +284,27 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         level: 'Expert',
         color: '#FF6C37',
         description: 'API testing & documentation',
+      },
+      {
+        name: 'Swagger',
+        icon: SiSwagger,
+        level: 'Advanced',
+        color: '#85EA2D',
+        description: 'API design, documentation & testing',
+      },
+      {
+        name: 'Docker',
+        icon: SiDocker,
+        level: 'Advanced',
+        color: '#2496ED',
+        description: 'Containerization & image management',
+      },
+      {
+        name: 'GitHub Copilot',
+        icon: SiGithubcopilot,
+        level: 'Advanced',
+        color: '#6e40c9',
+        description: 'AI-powered code assistant',
       },
       {
         name: 'Figma',
@@ -266,13 +319,6 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         level: 'Expert',
         color: '#007ACC',
         description: 'Primary development environment',
-      },
-      {
-        name: 'GitHub',
-        icon: SiGithub,
-        level: 'Expert',
-        color: '#a3a3a3',
-        description: 'Collaboration & code hosting',
       },
     ],
   },

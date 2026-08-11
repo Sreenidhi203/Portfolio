@@ -2,6 +2,43 @@ import type { Project, Certification } from '@/types'
 
 export const projects: Project[] = [
   {
+    id: '1',
+    title: 'Healthcare AI Assistant',
+    description:
+      'A comprehensive healthcare management system with a multi-agent AI assistant that provides intelligent medical support through specialized agents for symptom analysis, doctor search, appointment management, and medical history analysis.',
+    tags: ['Java', 'Spring Boot', 'Angular', 'Azure OpenAI', 'Multi-Agent AI', 'PostgreSQL', 'JWT Authentication', 'RAG'],
+    stack: [
+      'Java 17',
+      'Spring Boot 3.2',
+      'Spring Security',
+      'Spring Data JPA',
+      'WebFlux',
+      'Angular 17',
+      'TypeScript',
+      'RxJS',
+      'PostgreSQL 14+',
+      'Azure OpenAI',
+      'Azure AI Foundry',
+      'JWT',
+      'BCrypt',
+      'JUnit 5',
+      'Mockito',
+      'GitHub Actions',
+      'Docker Compose',
+      'Razorpay',
+      'JavaMail',
+    ],
+    features: [
+      'Multi-agent AI system with specialized healthcare agents (Symptom Analysis, Doctor Search, Appointment, Medical History, Emergency Triage)',
+      'RAG-powered document analysis for medical records and lab reports',
+      'Secure JWT authentication with role-based access control (Admin, Doctor, Patient)',
+      'Comprehensive healthcare management including appointments, prescriptions, lab reports, and patient analytics',
+      'Payment gateway (Razorpay) and email notification integrations',
+    ],
+    href: 'https://github.com/Sreenidhi203/Healthcare-AI',
+    image: 'sky',
+  },
+  {
     id: '7',
     title: 'Portfolio',
     description:
