@@ -14,7 +14,7 @@ import { inputCls } from '@/utils'
 import { SectionHeading } from '@/components'
 
 const contactStagger = stagger(0, 0.08)
-const FORMSPREE = 'https://formspree.io/f/xrewjngp'
+const FORMSPREE = 'https://formspree.io/f/xoeadepy'
 
 interface Fields {
   name: string
