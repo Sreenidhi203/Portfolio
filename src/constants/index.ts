@@ -4,7 +4,7 @@ export const SITE = {
   url: 'https://sreenidhii.dev',
   description:
     'Full-Stack Developer & AI-First Builder specialising in Gen AI, RAG pipelines, and multi-agent systems.',
-  email: 'sreenidhi202505@gmail.com',
+  email: 'sreenidhigodishala2004@gmail.com',
   github: 'https://github.com/Sreenidhi203',
   linkedin: 'https://linkedin.com/in/sree-n-04b590348',
   resume: 'https://drive.google.com/file/d/your-resume-id/view',
@@ -65,7 +65,7 @@ export const FOOTER_LINKS = [
       },
       {
         label: 'Email',
-        href: 'mailto:sreenidhi202505@gmail.com',
+        href: 'mailto:sreenidhigodishala2004@gmail.com',
         external: true,
       },
     ],
